@@ -4,7 +4,6 @@ Konzolos „potyogós amőba” Java 21-ben: a játékos a gép ellen játszik, 
 egy függőleges táblába, és aki előbb kirak **négy egyforma korongot egy vonalban** (vízszintesen,
 függőlegesen vagy átlósan), az nyer.
 
-
 A részletes magyarázat (architektúra, minták, algoritmusok):
 **[docs/MAGYARAZAT.md](docs/MAGYARAZAT.md)**
 
