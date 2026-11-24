@@ -1,8 +1,6 @@
 # Négy a sorban – részletes magyarázat
 
-Ez a leírás végigvezet a projekten úgy, hogy a végére minden osztályról el tudd mondani, mit csinál
-és miért így van megírva. A végén van egy **védési kérdéssor** és néhány **élő módosítási feladat**,
-mert ilyesmit szoktak kérni a bemutatáskor.
+Ez a leírás végigvezet a projekten.
 
 Tartalom:
 
