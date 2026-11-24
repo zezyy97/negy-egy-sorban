@@ -447,8 +447,6 @@ tapintatosan, „továbbfejlesztésként” megfogalmazni.)
 | Nincs visszavonás | UNDO, az immutable tábla miatt pár sorból |
 | Egyféle (véletlen) gép | Strategy minta, két szint + tipp |
 
----
-
 ## 13. Osztályok egy mondatban
 
 | Osztály | Egy mondatban |
