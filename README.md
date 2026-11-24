@@ -4,12 +4,8 @@ Konzolos „potyogós amőba” Java 21-ben: a játékos a gép ellen játszik, 
 egy függőleges táblába, és aki előbb kirak **négy egyforma korongot egy vonalban** (vízszintesen,
 függőlegesen vagy átlósan), az nyer.
 
-A program felépítése a *Fox and Hounds* példaprojektet követi: **Command tervezési minta**,
-fázisokra (állapotokra) bontott játékmenet, megváltoztathatatlan tábla, H2 adatbázis a mentésekhez,
-JUnit 5 tesztek és Jacoco lefedettségmérés. Pluszként van benne visszavonás (UNDO), két gépi
-nehézségi szint (**Strategy minta**), tipp (HINT) és táblaszerkesztő.
 
-A részletes magyarázat (architektúra, minták, algoritmusok, védési kérdések):
+A részletes magyarázat (architektúra, minták, algoritmusok):
 **[docs/MAGYARAZAT.md](docs/MAGYARAZAT.md)**
 
 ---
