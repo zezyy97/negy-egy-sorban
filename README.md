@@ -7,8 +7,6 @@ függőlegesen vagy átlósan), az nyer.
 A részletes magyarázat (architektúra, minták, algoritmusok):
 [docs/MAGYARAZAT.md](docs/MAGYARAZAT.md)
 
----
-
 ## Futtatás
 
 **Kell hozzá:** JDK 21 és Maven (az IntelliJ IDEA mindkettőt tartalmazza).
