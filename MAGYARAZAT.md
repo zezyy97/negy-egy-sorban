@@ -5,18 +5,16 @@ Ez a leírás végigvezet a projekten.
 Tartalom:
 
 1. [A játék szabályai](#1-a-játék-szabályai)
-2. [Mi felel meg minek a példaprojektben?](#2-mi-felel-meg-minek-a-példaprojektben)
-3. [Rétegek és csomagok](#3-rétegek-és-csomagok)
-4. [A Command tervezési minta](#4-a-command-tervezési-minta)
-5. [Fázisok (állapotgép)](#5-fázisok-állapotgép)
-6. [A megváltoztathatatlan tábla és a visszavonás](#6-a-megváltoztathatatlan-tábla-és-a-visszavonás)
-7. [Szabályok és győzelemkeresés – BoardService](#7-szabályok-és-győzelemkeresés--boardservice)
-8. [A gépi játékos – Strategy minta](#8-a-gépi-játékos--strategy-minta)
-9. [Adatbázis – H2 és Repository](#9-adatbázis--h2-és-repository)
-10. [A motor – GameEngine](#10-a-motor--gameengine)
-11. [Tesztek](#11-tesztek)
-12. [Miben lép tovább a példához képest?](#12-miben-lép-tovább-a-példához-képest)
-13. [Osztályok egy mondatban](#15-osztályok-egy-mondatban)
+2. [Rétegek és csomagok](#2-rétegek-és-csomagok)
+3. [A Command tervezési minta](#3-a-command-tervezési-minta)
+4. [Fázisok (állapotgép)](#4-fázisok-állapotgép)
+5. [A megváltoztathatatlan tábla és a visszavonás](#5-a-megváltoztathatatlan-tábla-és-a-visszavonás)
+6. [Szabályok és győzelemkeresés – BoardService](#6-szabályok-és-győzelemkeresés--boardservice)
+7. [A gépi játékos – Strategy minta](#7-a-gépi-játékos--strategy-minta)
+8. [Adatbázis – H2 és Repository](#8-adatbázis--h2-és-repository)
+9. [A motor – GameEngine](#9-a-motor--gameengine)
+10. [Tesztek](#10-tesztek)
+11. [Osztályok egy mondatban](#11-osztályok-egy-mondatban)
 
 ---
 
@@ -424,30 +422,7 @@ assertTrue(BoardService.isWinningMove(board, 3, Disc.RED));
 
 ---
 
-## 12. Miben lép tovább a példához képest?
-
-Ezek nem kötelező elemek, de a bemutatáskor jól mutatnak, mert mindegyik mögött egy tudatos
-tervezési döntés áll. (A példaprojekt oktatási célú, szándékosan egyszerűbb – ezt érdemes
-tapintatosan, „továbbfejlesztésként” megfogalmazni.)
-
-| A példában | Itt |
-|---|---|
-| A „ki lép” két helyen tárolva (`Board` és `GameState`), eltérhettek | kiszámoljuk a korongokból – nem lehet ellentmondás |
-| A lépésparancsok nem ellenőrizték, hogy ki következik | DROP / MACHINE / HINT ellenőrzi |
-| Minden parancs újrafordította a saját regexét, és felülírta a `match`-et | az ősosztály egyszer elintézi |
-| A motor kétszer illesztette a regexet ugyanarra a bemenetre | a registry a parancsot és a `Matcher`-t együtt adja |
-| SQL a parancsokban, a LIST és a LOAD betöltő kódja kétszer | egy `GameRepository` (DAO) |
-| A régi `PlayOnTerminal` szövegösszefűzéssel épített SQL-t | mindenhol `PreparedStatement` |
-| Elfogyó bemenetnél (`Ctrl+D`) kivétellel leállt | `hasNextLine()` – rendes leállás |
-| Egy váratlan kivétel leállította a programot | a motor elkapja, kiírja, és folytatja |
-| Szerkesztett, értelmetlen állásból is indítható volt a játék | a `PLAY` ellenőrzi (`problemBeforePlay`) |
-| Volt olyan fázis (`HAVE_SIDE`), amelybe egyik parancs sem vitt | minden fázis elérhető és használt |
-| Az egyik teszt (`testGetEmptyBoard`) `null` listát várt, de üres listát kapott | 87 zöld teszt |
-| `System.out` fixen a parancsokban | `PrintStream out` paraméter – a kimenet tesztelhető |
-| Nincs visszavonás | UNDO, az immutable tábla miatt pár sorból |
-| Egyféle (véletlen) gép | Strategy minta, két szint + tipp |
-
-## 13. Osztályok egy mondatban
+## 12. Osztályok egy mondatban
 
 | Osztály | Egy mondatban |
 |---|---|
