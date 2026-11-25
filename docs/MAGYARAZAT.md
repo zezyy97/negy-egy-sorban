@@ -1,8 +1,6 @@
 # Négy a sorban – részletes magyarázat
 
-Ez a leírás végigvezet a projekten úgy, hogy a végére minden osztályról el tudd mondani, mit csinál
-és miért így van megírva. A végén van egy **védési kérdéssor** és néhány **élő módosítási feladat**,
-mert ilyesmit szoktak kérni a bemutatáskor.
+Ez a leírás végigvezet a projekten.
 
 Tartalom:
 
@@ -17,8 +15,7 @@ Tartalom:
 9. [Adatbázis – H2 és Repository](#9-adatbázis--h2-és-repository)
 10. [A motor – GameEngine](#10-a-motor--gameengine)
 11. [Tesztek](#11-tesztek)
-12. [Miben lép tovább a példához képest?](#12-miben-lép-tovább-a-példához-képest)
-15. [Osztályok egy mondatban](#13-osztályok-egy-mondatban)
+12. [Osztályok egy mondatban](#12-osztályok-egy-mondatban)
 
 ---
 
@@ -426,32 +423,7 @@ assertTrue(BoardService.isWinningMove(board, 3, Disc.RED));
 
 ---
 
-## 12. Miben lép tovább a példához képest?
-
-Ezek nem kötelező elemek, de a bemutatáskor jól mutatnak, mert mindegyik mögött egy tudatos
-tervezési döntés áll. (A példaprojekt oktatási célú, szándékosan egyszerűbb – ezt érdemes
-tapintatosan, „továbbfejlesztésként” megfogalmazni.)
-
-| A példában | Itt |
-|---|---|
-| A „ki lép” két helyen tárolva (`Board` és `GameState`), eltérhettek | kiszámoljuk a korongokból – nem lehet ellentmondás |
-| A lépésparancsok nem ellenőrizték, hogy ki következik | DROP / MACHINE / HINT ellenőrzi |
-| Minden parancs újrafordította a saját regexét, és felülírta a `match`-et | az ősosztály egyszer elintézi |
-| A motor kétszer illesztette a regexet ugyanarra a bemenetre | a registry a parancsot és a `Matcher`-t együtt adja |
-| SQL a parancsokban, a LIST és a LOAD betöltő kódja kétszer | egy `GameRepository` (DAO) |
-| A régi `PlayOnTerminal` szövegösszefűzéssel épített SQL-t | mindenhol `PreparedStatement` |
-| Elfogyó bemenetnél (`Ctrl+D`) kivétellel leállt | `hasNextLine()` – rendes leállás |
-| Egy váratlan kivétel leállította a programot | a motor elkapja, kiírja, és folytatja |
-| Szerkesztett, értelmetlen állásból is indítható volt a játék | a `PLAY` ellenőrzi (`problemBeforePlay`) |
-| Volt olyan fázis (`HAVE_SIDE`), amelybe egyik parancs sem vitt | minden fázis elérhető és használt |
-| Az egyik teszt (`testGetEmptyBoard`) `null` listát várt, de üres listát kapott | 87 zöld teszt |
-| `System.out` fixen a parancsokban | `PrintStream out` paraméter – a kimenet tesztelhető |
-| Nincs visszavonás | UNDO, az immutable tábla miatt pár sorból |
-| Egyféle (véletlen) gép | Strategy minta, két szint + tipp |
-
----
-
-## 13. Osztályok egy mondatban
+## 12. Osztályok egy mondatban
 
 | Osztály | Egy mondatban |
 |---|---|
