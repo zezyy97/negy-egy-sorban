@@ -5,7 +5,7 @@ egy függőleges táblába, és aki előbb kirak **négy egyforma korongot egy v
 függőlegesen vagy átlósan), az nyer.
 
 A részletes magyarázat (architektúra, minták, algoritmusok):
-[docs/MAGYARAZAT.md](docs/MAGYARAZAT.md)
+[MAGYARAZAT.md](MAGYARAZAT.md)
 
 ## Futtatás
 
