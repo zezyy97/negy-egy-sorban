@@ -451,7 +451,7 @@ tapintatosan, „továbbfejlesztésként” megfogalmazni.)
 
 ---
 
-## 15. Osztályok egy mondatban
+## 13. Osztályok egy mondatban
 
 | Osztály | Egy mondatban |
 |---|---|
