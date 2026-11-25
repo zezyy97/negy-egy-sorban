@@ -32,31 +32,7 @@ A játékos a gép ellen játszik. `PLAY R` esetén te vagy a piros (te kezdesz)
 
 ---
 
-## 2. Mi felel meg minek a példaprojektben?
-
-A projekt szándékosan ugyanazt a vázat használja, mint a *Fox and Hounds* példa, így a két
-program rétegről rétegre összevethető:
-
-| Fox and Hounds (példa) | Négy a sorban (ez a projekt) | Megjegyzés |
-|---|---|---|
-| `Board` (immutable) | `model.Board` (immutable) | itt 2D tömb, a példában pozíciólisták |
-| `Position` osztály | `model.Position` **record** | a record ugyanazt adja sokkal rövidebben |
-| `Direction` (4 átlós irány) | `model.LineDirection` (4 vonalirány) | itt a győzelemkereséshez kell |
-| `Fox`, `Hound`, `Figure` | `model.Disc` enum | egyforma korongok vannak, csak a színük más |
-| `Move` (bábu + irány) | `model.Move` record (szín + oszlop) | gravitáció miatt elég az oszlop |
-| `GamePhase` | `model.GamePhase` | EDIT, HAVE_BOARD, PLAYING, GAME_ENDED, SAVED_GAME |
-| `GameState` | `model.GameState` | + előzményverem (UNDO), + gépi stratégia |
-| `BoardService` | `businesslogic.BoardService` | szabályok: ki jön, szabályos-e, ki nyert |
-| `doARandom…Move` | `strategy.RandomMoveStrategy`, `SmartMoveStrategy` | Strategy minta, cserélhető |
-| `Command` + `CommandRegistry` | `command.Command` + `CommandRegistry` | + usage/leírás a súgóhoz |
-| 18 parancsosztály | 16 parancsosztály | néhányat egy paraméteres parancs vált ki |
-| `GameEngine` | `engine.GameEngine` | bemenet/kimenet kívülről adható (tesztelhető) |
-| `DbInit` + SQL a parancsokban | `db.DbInit` + `db.GameRepository` | az SQL egy helyre került (DAO) |
-| `createDbScript.txt` | `createDbScript.sql` | + megszorítások (CHECK), + mintajátszmák |
-
----
-
-## 3. Rétegek és csomagok
+## 2. Rétegek és csomagok
 
 ```
                 ┌────────────────────────────────────────────┐
@@ -87,7 +63,7 @@ Ettől lesz minden rész külön tesztelhető.
 
 ---
 
-## 4. A Command tervezési minta
+## 3. A Command tervezési minta
 
 ### Mi a lényege?
 
@@ -157,7 +133,7 @@ alakot is. Az ősosztály `CASE_INSENSITIVE` módban fordítja a mintát, ezért
 
 ---
 
-## 5. Fázisok (állapotgép)
+## 4. Fázisok (állapotgép)
 
 ```
   EDIT ──NEW / LOAD──▶ HAVE_BOARD ──PLAY──▶ PLAYING ──(négyes vagy tele tábla)──▶ GAME_ENDED
@@ -197,7 +173,7 @@ MACHINE parancs ugyanabban a fázisban él, de mindkettő ellenőrzi, hogy most 
 
 ---
 
-## 6. A megváltoztathatatlan tábla és a visszavonás
+## 5. A megváltoztathatatlan tábla és a visszavonás
 
 A `Board` osztály **immutable**: minden mezője `final`, a belső `Disc[][]` tömböt soha nem adja
 ki, és nincs egyetlen olyan metódusa sem, ami a meglévő táblát módosítaná. A „módosítók” új
@@ -227,7 +203,7 @@ a játékosét is visszavonja (különben a visszavonás után a gép jönne, é
 
 ---
 
-## 7. Szabályok és győzelemkeresés – BoardService
+## 6. Szabályok és győzelemkeresés – BoardService
 
 ### Ki jön?
 
@@ -277,7 +253,7 @@ típus maga jelzi, hogy lehet, hogy nincs érték.
 
 ---
 
-## 8. A gépi játékos – Strategy minta
+## 7. A gépi játékos – Strategy minta
 
 A **Strategy minta** lényege: egy algoritmuscsaládot közös felület mögé teszünk, és futás közben
 cserélhetővé tesszük. Itt az algoritmus az, hogy *a gép melyik oszlopot választja*.
@@ -308,7 +284,7 @@ véletlen stratégia között, és ellenőrzi, hogy az okos legalább 18-at megn
 
 ---
 
-## 9. Adatbázis – H2 és Repository
+## 8. Adatbázis – H2 és Repository
 
 ### H2 memóriában
 
@@ -363,7 +339,7 @@ ahol futás közben SQL-lel is megnézheted a mentéseket. Ha a port foglalt, a 
 
 ---
 
-## 10. A motor – GameEngine
+## 9. A motor – GameEngine
 
 ```java
 while (!state.isExitRequested()) {
@@ -394,7 +370,7 @@ A `Main` csak „összedrótozza” a részeket: adatbázis → repository → r
 
 ---
 
-## 11. Tesztek
+## 10. Tesztek
 
 87 JUnit 5 teszt, 7 osztályban (`mvn test`, lefedettség: `mvn verify` → `target/site/jacoco/index.html`):
 
@@ -422,7 +398,7 @@ assertTrue(BoardService.isWinningMove(board, 3, Disc.RED));
 
 ---
 
-## 12. Osztályok egy mondatban
+## 11. Osztályok egy mondatban
 
 | Osztály | Egy mondatban |
 |---|---|
